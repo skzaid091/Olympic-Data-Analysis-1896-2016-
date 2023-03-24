@@ -21,7 +21,12 @@ def empty_space():
         pass
 
 
-events_data = pd.read_csv('data/athlete_events.csv')
+data1 = pd.read_excel('data/athlete_events_1.xlsx')
+data1.drop('Unnamed: 0', axis=1, inplace=True)
+data2 = pd.read_excel('data/athlete_events_2.xlsx')
+data2.drop('Unnamed: 0', axis=1, inplace=True)
+
+events_data = pd.concat([data1, data2], axis=1, join='inner')
 regions_data = pd.read_csv('data/noc_regions.csv')
 
 df = preprocessor.processor(events_data, regions_data)
