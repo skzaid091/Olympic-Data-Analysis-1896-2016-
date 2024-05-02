@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+# import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.figure_factory as ff
@@ -102,25 +102,25 @@ if user_menu == 'Overall Analysis':
 
     empty_space()
 
-    st.title('Number of Events over Time')
-    number_of_events_o_time = help.data_over_time(df, 'Event')
-    fig_events = px.line(number_of_events_o_time, x='Year', y='Event')
-    st.plotly_chart(fig_events)
+    # st.title('Number of Events over Time')
+    # number_of_events_o_time = help.data_over_time(df, 'Event')
+    # fig_events = px.line(number_of_events_o_time, x='Year', y='Event')
+    # st.plotly_chart(fig_events)
 
-    empty_space()
+    # empty_space()
 
-    st.title('Number of Athletes over Time')
-    number_of_events_o_time = help.data_over_time(df, 'Name')
-    fig_events = px.line(number_of_events_o_time, x='Year', y='Name')
-    st.plotly_chart(fig_events)
+    # st.title('Number of Athletes over Time')
+    # number_of_events_o_time = help.data_over_time(df, 'Name')
+    # fig_events = px.line(number_of_events_o_time, x='Year', y='Name')
+    # st.plotly_chart(fig_events)
 
-    empty_space()
+    # empty_space()
 
     st.title('No. of Events over Time')
     fig, ax = plt.subplots(figsize=(15, 15))
     y = df.drop_duplicates(['Year', 'Sport', 'Event'])
     ax = sns.heatmap(y.pivot_table(index='Sport', columns='Year', values='Event', aggfunc='count').fillna(0).astype(int), annot=True)
-    st.pyplot(fig)
+    st.plotly_chart(fig)
 
     empty_space()
 
@@ -138,23 +138,23 @@ if user_menu == 'Overall Analysis':
     st.table(quality_data)
 
 if user_menu == 'Country-Wise Analysis':
-    nations = df['region'].dropna().unique().tolist()
+    # nations = df['region'].dropna().unique().tolist()
 
-    country_t = st.sidebar.selectbox('Select Country', nations)
+    # country_t = st.sidebar.selectbox('Select Country', nations)
 
-    country_Graph = help.year_wise_medal_tally(df, country_t)
+    # country_Graph = help.year_wise_medal_tally(df, country_t)
 
-    fig = px.line(country_Graph, x="Year", y="Medal")
-    st.title(country_t + ' Medal Tally over the Years')
-    st.plotly_chart(fig)
+    # fig = px.line(country_Graph, x="Year", y="Medal")
+    # st.title(country_t + ' Medal Tally over the Years')
+    # st.plotly_chart(fig)
 
-    empty_space()
+    # empty_space()
 
     x = help.country_sports_wise(df, country_t)
     fig2, ma = plt.subplots(figsize=(15, 15))
     ma = sns.heatmap(x.pivot_table(index='Sport', columns='Year', values='Medal', aggfunc='count').fillna(0).astype(int), annot=True)
     st.title(country_t + ' Medals in each Sport over the Years')
-    st.pyplot(fig2)
+    st.plotly_chart(fig2)
 
     empty_space()
 
@@ -201,6 +201,6 @@ if user_menu == 'Athlete-Wise Analysis':
     fig3, fx = plt.subplots()
     fx = sns.scatterplot(data=temp, x='Weight', y='Height', style='Sex', hue='Medal', s=40)
     plt.figure(figsize=(10, 10))
-    st.pyplot(fig3)
+    st.plotly_chart(fig3)
 
 
